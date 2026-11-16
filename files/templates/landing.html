@@ -1,0 +1,111 @@
+<!doctype html><html lang=ru><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>{{ s.site_name }} — {{ s.site_tagline }}</title><style>*{box-sizing:border-box;margin:0}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#f6f8fb;color:#101828;line-height:1.6}
+a{color:#0f62fe;text-decoration:none}.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+.card{background:#fff;border:1px solid #e4e9f0;border-radius:14px;padding:24px;margin-bottom:16px}
+h1{font-size:25px;margin-bottom:10px}h2{font-size:16.5px;margin-bottom:12px}
+label{display:block;font-size:12.5px;color:#5b6b82;margin:12px 0 5px}
+input,select,textarea{width:100%;padding:11px 13px;border:1px solid #e4e9f0;border-radius:9px;font-size:15px;font-family:inherit;background:#fff;color:#101828}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#0f62fe}textarea{min-height:88px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 19px;border-radius:9px;border:1px solid transparent;background:#0f62fe;color:#fff;font-size:14.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:#0b52d6}.btn.o{background:#fff;border-color:#e4e9f0;color:#101828}.btn.g{background:#00867d}.btn.r{background:#c62828}.btn.sm{padding:6px 11px;font-size:12.5px}
+.msg{background:#e7f3ff;border:1px solid #b9dbff;color:#0b4ea2;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:14.5px}
+.hint{font-size:12.5px;color:#5b6b82;margin-top:8px}
+code{background:#f2f5f9;border:1px solid #e4e9f0;border-radius:6px;padding:2px 7px;font-size:12.5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th,td{padding:9px 8px;border-bottom:1px solid #e4e9f0;text-align:left;vertical-align:top}th{color:#5b6b82;font-size:12.5px}
+.badge{padding:3px 10px;border-radius:99px;font-size:11.5px;font-weight:600}.badge.on{background:#dff5ec;color:#00614f}.badge.off{background:#fdeaea;color:#a12626}
+
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #e4e9f0}
+.nav{display:flex;align-items:center;gap:22px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:#101828}
+.mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#0f62fe,#00867d);display:grid;place-items:center;color:#fff;font-size:13px;font-weight:700}
+.nav nav{display:flex;gap:20px;margin-left:auto}.nav nav a{font-size:14.5px;color:#5b6b82}
+.hero{padding:64px 0 54px;background:linear-gradient(180deg,#f8fafc,#fff)}
+.hg{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+.hero h1{font-size:clamp(28px,4.2vw,42px);line-height:1.16;margin-bottom:15px}
+.lead{font-size:17px;color:#5b6b82;max-width:530px;margin-bottom:24px}
+.panel{background:#0b1524;border-radius:15px;padding:21px;color:#dbe6f5;font-size:13px;font-family:ui-monospace,Menlo,monospace}
+.panel .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.07)}.panel .row:last-child{border:0}
+.panel h4{font-family:inherit;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#7d93b0;margin-bottom:10px}
+.ok{color:#4ade80}.warn{color:#fbbf24}
+.trust{border-top:1px solid #e4e9f0;border-bottom:1px solid #e4e9f0;background:#f6f8fb}
+.ti{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:26px 0;text-align:center}
+.ti b{display:block;font-size:27px;font-weight:700}.ti span{font-size:13px;color:#5b6b82}
+section{padding:62px 0}.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0f62fe;margin-bottom:10px}
+h2.big{font-size:clamp(22px,3vw,31px);margin-bottom:11px}.sub{color:#5b6b82;font-size:16px;max-width:630px;margin-bottom:32px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.sc{border:1px solid #e4e9f0;border-radius:14px;padding:22px;background:#fff}
+.ico{width:38px;height:38px;border-radius:10px;background:#f2f5f9;display:grid;place-items:center;font-size:18px;margin-bottom:12px}
+.sc h3{font-size:16px;margin-bottom:7px}.sc p{color:#5b6b82;font-size:14.5px}
+.soft{background:#f6f8fb}
+.pr{display:flex;flex-direction:column;border:1px solid #e4e9f0;border-radius:14px;padding:24px;background:#fff}
+.pr.hi{border-color:#0f62fe}.pr .tag{font-size:11px;font-weight:700;color:#0f62fe;text-transform:uppercase;margin-bottom:8px}
+.pr .num{font-size:28px;font-weight:700;margin:4px 0}.pr .per{color:#5b6b82;font-size:13px;margin-bottom:14px}
+.pr ul{list-style:none;margin-bottom:18px;flex:1}.pr li{font-size:14px;color:#5b6b82;padding:5px 0 5px 20px;position:relative}
+.pr li::before{content:"✓";position:absolute;left:0;color:#00867d;font-weight:700}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+.st{padding:20px;border-radius:14px;background:#fff;border:1px solid #e4e9f0}
+.st::before{counter-increment:s;content:"0" counter(s);display:block;font-size:24px;font-weight:700;color:#0f62fe;margin-bottom:8px}
+.st h4{font-size:15px;margin-bottom:5px}.st p{font-size:13.5px;color:#5b6b82}
+.contact{background:#0b1524;color:#e8eff8;border-radius:16px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.contact h2{color:#fff;font-size:25px}.contact p{color:#9db1cb;font-size:15px}
+.contact label{color:#9db1cb}.contact input,.contact textarea{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16);color:#fff}
+.meta{margin-top:20px;font-size:14px;color:#9db1cb}.meta div{padding:3px 0}
+footer{border-top:1px solid #e4e9f0;padding:30px 0;background:#f6f8fb}
+.foot{display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;font-size:14px;color:#5b6b82}
+.foot .col{display:flex;flex-direction:column;gap:5px}.foot a{color:#5b6b82}
+@media(max-width:940px){.hg,.contact{grid-template-columns:1fr}.g3,.steps,.ti{grid-template-columns:1fr 1fr}.nav nav{display:none}.contact{padding:24px}}
+@media(max-width:560px){.g3,.steps,.ti{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="wrap nav"><a class=brand href="/"><span class=mark>И</span>{{ s.site_name }}</a>
+<nav><a href="#services">Услуги</a><a href="#pricing">Тарифы</a><a href="#process">Как работаем</a><a href="#contact">Контакты</a></nav>
+<a class="btn o" href="/login">Личный кабинет</a></div></header>
+{% if msg %}<div class=wrap style="padding-top:14px"><div class=msg>{{ msg }}</div></div>{% endif %}
+<div class=hero><div class="wrap hg"><div><h1>IT-инфраструктура,<br>которая просто работает</h1>
+<p class=lead>{{ s.site_tagline }}</p><p><a class=btn href="#contact">Обсудить проект</a> <a class="btn o" href="#services">Услуги</a></p></div>
+<div class=panel><h4>Мониторинг узлов</h4>
+<div class=row><span>web-01 · nginx</span><span class=ok>healthy</span></div>
+<div class=row><span>db-01 · postgres</span><span class=ok>healthy</span></div>
+<div class=row><span>backup · daily</span><span class=ok>02:15 ok</span></div>
+<div class=row><span>app-02 · worker</span><span class=warn>load 71%</span></div>
+<div class=row><span>uptime 30d</span><span>{{ s.site_uptime }}%</span></div>
+<div class=row><span>reaction SLA</span><span>&lt; 15 min</span></div></div></div></div>
+<div class=trust><div class="wrap ti"><div><b>{{ s.site_years }}</b><span>лет на рынке</span></div>
+<div><b>{{ s.site_projects }}+</b><span>проектов</span></div><div><b>{{ s.site_uptime }}%</b><span>доступность</span></div>
+<div><b>24/7</b><span>дежурная смена</span></div></div></div>
+<section id=services><div class=wrap><div class=eyebrow>Услуги</div><h2 class=big>Что мы делаем</h2>
+<p class=sub>Полный цикл: от архитектуры до ежедневной эксплуатации.</p><div class=g3>
+<div class=sc><div class=ico>🖥️</div><h3>Размещение и серверы</h3><p>Конфигурация, окружение, миграция, резервные копии и восстановление.</p></div>
+<div class=sc><div class=ico>🧩</div><h3>Веб-сервисы</h3><p>Сайты, порталы, личные кабинеты, интеграции с CRM и учётом.</p></div>
+<div class=sc><div class=ico>🛠️</div><h3>Поддержка</h3><p>Дежурная смена, SLA, обновления, инциденты, отчётность.</p></div>
+<div class=sc><div class=ico>📊</div><h3>Мониторинг</h3><p>Метрики доступности и нагрузки, оповещения, дашборды.</p></div>
+<div class=sc><div class=ico>🔐</div><h3>Аудит</h3><p>Конфигурации, доступы, обновления, план восстановления.</p></div>
+<div class=sc><div class=ico>⚙️</div><h3>Автоматизация</h3><p>Обслуживание, CI/CD, бэкапы, синхронизация данных.</p></div></div></div></section>
+<section id=pricing class=soft><div class=wrap><div class=eyebrow>Тарифы</div><h2 class=big>Сопровождение</h2>
+<p class=sub>Фиксированная стоимость в месяц. Разработка оценивается отдельно.</p><div class=g3>
+<div class=pr><div class=tag>Базовый</div><div class=num>4 900 ₽</div><div class=per>в месяц</div>
+<ul><li>Мониторинг</li><li>Обновления</li><li>Резервные копии</li><li>Реакция до 8 ч</li></ul><a class="btn o" href="#contact">Заявка</a></div>
+<div class="pr hi"><div class=tag>Бизнес</div><div class=num>12 400 ₽</div><div class=per>в месяц</div>
+<ul><li>Всё из Базового</li><li>Смена 24/7</li><li>Реакция до 30 мин</li><li>4 часа работ</li><li>Отчёт</li></ul><a class=btn href="#contact">Заявка</a></div>
+<div class=pr><div class=tag>Проектный</div><div class=num>по смете</div><div class=per>разово</div>
+<ul><li>Аудит</li><li>Миграция</li><li>Разработка</li><li>Обучение</li></ul><a class="btn o" href="#contact">Обсудить</a></div></div></div></section>
+<section id=process><div class=wrap><div class=eyebrow>Процесс</div><h2 class=big>Как мы работаем</h2>
+<p class=sub>Прозрачные этапы и зона ответственности.</p><div class=steps>
+<div class=st><h4>Заявка</h4><p>Описываете задачу, уточняем детали.</p></div>
+<div class=st><h4>Аудит</h4><p>Смотрим состояние, план работ.</p></div>
+<div class=st><h4>Внедрение</h4><p>Работы по смете, документация.</p></div>
+<div class=st><h4>Поддержка</h4><p>Эксплуатация по SLA, отчёты.</p></div></div></div></section>
+<section id=contact><div class=wrap><div class=contact><div>
+<div class=eyebrow style="color:#6ea8ff">Контакты</div><h2>Расскажите о задаче</h2>
+<p>Опишите, что нужно сделать. Ответим в рабочее время.</p>
+<div class=meta>{% if s.site_phone %}<div>Телефон: {{ s.site_phone }}</div>{% endif %}{% if s.site_email %}<div>Почта: {{ s.site_email }}</div>{% endif %}{% if s.site_addr %}<div>{{ s.site_addr }}</div>{% endif %}<div>Пн–Пт 10:00–19:00 МСК</div></div></div>
+<form method=post action="/callback"><label>Имя *</label><input name=name required>
+<label>Телефон *</label><input name=phone required placeholder="+7 900 000-00-00">
+<label>Почта</label><input name=email type=email><label>Задача</label><textarea name=comment></textarea>
+<p style="margin-top:16px"><button class=btn style="width:100%">Отправить</button></p>
+<div style="font-size:12px;color:#7d93b0;margin-top:9px">Согласие на <a href="/privacy" style="color:#9db1cb;text-decoration:underline">обработку данных</a>.</div></form>
+</div></div></section>
+<footer><div class="wrap foot"><div class=col><b>{{ s.site_name }}</b><span>© 2026</span>{% if s.site_inn %}<span>ИНН {{ s.site_inn }}</span>{% endif %}</div>
+<div class=col><a href="#services">Услуги</a><a href="#pricing">Тарифы</a></div>
+<div class=col><a href="/privacy">Данные</a><a href="#contact">Контакты</a></div>
+<div class=col><a href="/login">Личный кабинет</a></div></div></footer></body></html>

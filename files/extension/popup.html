@@ -1,0 +1,32 @@
+<!doctype html><html lang=ru><head><meta charset=utf-8><style>
+*{box-sizing:border-box}body{width:330px;margin:0;font-family:system-ui,sans-serif;background:#0f172a;color:#e2e8f0;padding:14px}
+h1{font-size:15px;margin:0 0 10px}.hidden{display:none!important}
+input,textarea{width:100%;padding:8px 10px;border:1px solid #334155;border-radius:8px;background:#1e293b;color:#e2e8f0;font-size:13px;margin-bottom:8px}
+textarea{min-height:60px;font-family:monospace;font-size:11px}
+button{padding:8px 12px;border:0;border-radius:8px;background:#3b82f6;color:#fff;font-size:13px;cursor:pointer}
+button.wide{width:100%}button.ghost{background:#1e293b;border:1px solid #334155}button.danger{background:#7f1d1d}
+.badge{display:block;text-align:center;padding:8px;border-radius:8px;font-size:13px;font-weight:600;margin-bottom:10px}
+.badge.on{background:#14532d;color:#86efac}.badge.off{background:#334155;color:#94a3b8}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.mode-btn{background:#1e293b;border:1px solid #334155;text-align:left;padding:8px}.mode-btn.active{background:#3b82f6}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.chip{padding:5px 9px;border-radius:99px;background:#1e293b;border:1px solid #334155;font-size:12px;cursor:pointer}
+.chip.active{background:#14532d;border-color:#166534;color:#86efac}
+.st{font-size:12px;color:#94a3b8;min-height:16px;margin:6px 0}.st.error{color:#fca5a5}.st.ok{color:#86efac}
+.sec{font-size:11px;color:#94a3b8;text-transform:uppercase;margin:10px 0 6px}.row{display:flex;gap:6px}.row button{flex:1}
+hr{border:0;border-top:1px solid #334155;margin:12px 0}#srv{font-size:12px;color:#94a3b8;text-align:center;margin-bottom:8px}
+</style></head><body><h1>PM Client</h1>
+<div id=act><div id=srvBlock><div class=sec>Адрес сервера</div><input id=serverUrl value="__SERVER_URL__"></div>
+<div class=sec>Код доступа</div><input id=key placeholder="A1B2C3D4" style="text-transform:uppercase">
+<button id=go class=wide>Активировать</button><div id=actSt class=st></div></div>
+<div id=ctl class=hidden><span id=badge class="badge off">Выключен</span><div id=srv></div>
+<div class=modes><button class=mode-btn data-mode=whitelist>Только указанные</button><button class=mode-btn data-mode=blacklist>Все кроме</button><button class=mode-btn data-mode=always>Весь трафик</button><button class=mode-btn data-mode=off>Выключен</button></div>
+<div class=sec>Пресеты</div><div id=chips class=chips></div>
+<div class=sec>Свои домены</div><textarea id=custom></textarea><button id=saveD class="ghost wide">Сохранить</button>
+<div class=sec>Списки</div><div class=row><button id=tg class=ghost>Telegram</button><button id=ru class=ghost>Список РФ</button></div>
+<div class=row style="margin-top:6px"><button id=sync class=ghost>Обновить</button><button id=chk class=ghost>Проверить</button></div>
+<div id=st class=st></div><hr><button id=sug class="ghost wide">Предложить пресет</button>
+<div id=sugF class=hidden style="margin-top:8px"><input id=sugN placeholder="Название"><textarea id=sugD placeholder="домены"></textarea>
+<div class=row><button id=sugSend>Отправить</button><button id=sugCancel class=ghost>Отмена</button></div><div id=sugSt class=st></div></div>
+<hr><button id=reset class="danger wide">Сбросить код</button></div>
+<script src=popup.js></script></body></html>

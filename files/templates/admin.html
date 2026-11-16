@@ -1,0 +1,175 @@
+<!doctype html><html lang=ru><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Админка</title><style>
+*{box-sizing:border-box;margin:0}
+:root{--bg:#070b14;--panel:#0f1626;--line:rgba(148,163,184,.14);--txt:#e8eef8;--mut:#8fa3bf;
+--acc:#38bdf8;--acc2:#6366f1;--ok:#34d399;--bad:#f87171;--warn:#fbbf24}
+html{scroll-behavior:smooth}
+body{display:block!important;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+background:var(--bg);color:var(--txt);line-height:1.55;font-size:15px;
+background-image:radial-gradient(1100px 620px at 8% -12%,rgba(56,189,248,.13),transparent 62%),
+radial-gradient(900px 620px at 96% -6%,rgba(99,102,241,.13),transparent 60%);background-attachment:fixed}
+::-webkit-scrollbar{width:11px;height:11px}::-webkit-scrollbar-track{background:#0a1120}
+::-webkit-scrollbar-thumb{background:linear-gradient(#38bdf8,#6366f1);border-radius:8px;border:2px solid #0a1120}
+a{color:var(--acc);text-decoration:none;transition:.15s}a:hover{color:#7dd3fc}
+header{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+padding:14px 26px;background:rgba(10,16,28,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+header h1{font-size:17px;font-weight:650;flex:1;margin:0;letter-spacing:-.01em}
+header a{font-size:13.5px;padding:7px 12px;border-radius:9px;border:1px solid transparent}
+header a:hover{background:rgba(255,255,255,.06);border-color:var(--line)}
+main,.wrap{max-width:1280px;margin:0 auto;padding:24px 26px;width:100%}
+h1{font-size:23px;font-weight:650;letter-spacing:-.02em;margin-bottom:14px}
+h2{font-size:15.5px;font-weight:620;margin-bottom:14px;letter-spacing:-.01em}
+.card{background:linear-gradient(165deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px;transition:.2s}
+.card:hover{border-color:rgba(148,163,184,.26)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tabs button{padding:9px 16px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--txt);
+border-radius:11px;cursor:pointer;font-size:13.5px;font-family:inherit;transition:.18s}
+.tabs button:hover{background:rgba(255,255,255,.09)}
+.tabs button.active{background:linear-gradient(90deg,var(--acc),var(--acc2));color:#04121f;border-color:transparent;font-weight:650}
+.tab{display:none}.tab.active{display:block;animation:fade .22s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px}
+label{display:block;font-size:12px;color:var(--mut);margin-bottom:5px}
+input,select,textarea{width:100%;padding:10px 13px;border:1px solid var(--line);border-radius:10px;
+font-size:14px;font-family:inherit;background:rgba(6,11,20,.6);color:var(--txt);transition:.15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px rgba(56,189,248,.14)}
+select option{background:#0f1626}
+textarea{min-height:92px;resize:vertical}
+textarea.big{min-height:250px;font-family:ui-monospace,Menlo,monospace;font-size:12px;white-space:pre}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;border:0;border-radius:10px;
+background:linear-gradient(90deg,var(--acc),var(--acc2));color:#04121f;font-weight:650;font-size:14px;cursor:pointer;font-family:inherit;transition:.18s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn.o{background:rgba(255,255,255,.07);border:1px solid var(--line);color:var(--txt)}
+.btn.g{background:linear-gradient(90deg,#34d399,#10b981);color:#04231a}
+.btn.r{background:linear-gradient(90deg,#f87171,#ef4444);color:#fff}
+.btn.sm{padding:6px 11px;font-size:12.5px;border-radius:8px}
+.msg{background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.35);color:#bae6fd;
+border-radius:11px;padding:12px 16px;margin-bottom:16px;font-size:14px}
+.hint{font-size:12.5px;color:var(--mut);margin-top:8px;line-height:1.55}
+code{background:rgba(6,11,20,.7);border:1px solid var(--line);border-radius:6px;padding:2px 7px;
+font-size:12.5px;color:#6ee7b7;font-family:ui-monospace,Menlo,monospace}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mut);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+tbody tr:hover,tr:hover{background:rgba(255,255,255,.025)}
+.tablewrap{overflow-x:auto;border-radius:10px}
+.badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11.5px;font-weight:650}
+.badge.on{background:rgba(52,211,153,.16);color:#6ee7b7}
+.badge.off{background:rgba(248,113,113,.15);color:#fca5a5}
+.actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.actions form{display:flex;gap:4px;align-items:center;margin:0}
+.actions input{width:88px;padding:6px 9px;font-size:12px}
+.bar{height:6px;background:rgba(148,163,184,.18);border-radius:4px;margin-top:5px;overflow:hidden}
+.bar i{display:block;height:6px;border-radius:4px;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:#64748b;margin-right:7px}
+.dot.ok{background:var(--ok);box-shadow:0 0 9px var(--ok)}.dot.bad{background:var(--bad)}
+#xuiStatus{font-size:13px;color:var(--mut);display:inline-flex;align-items:center}
+@media(max-width:720px){header{padding:12px 16px}main,.wrap{padding:16px}.grid{grid-template-columns:1fr}}
+</style></head><body><header><h1>🛰️ {{ s.panel_name }}</h1><span id=xuiStatus style="font-size:13px;color:#93a0b8"><span class=dot id=xuiDot></span>3x-ui…</span><a href="/git">🐙 GitHub</a><a href="/access">🔑 Доступы</a><a href="/certs">🔐 Сертификаты</a><a href="/site">🌐 Сайт</a><a href="/extension.zip">⬇</a><a href="/logout">Выйти</a></header><main class=wrap style="padding:22px">{% if msg %}<div class=msg>{{ msg }}</div>{% endif %}<div class=tabs><button data-tab="clients" class=active>👥 Клиенты</button><button data-tab="plans">💰 Тарифы</button><button data-tab="settings">⚙️ Настройки</button><button data-tab="ext">🧩 Расширение</button><button data-tab="tools">🧰 Сервис</button><button data-tab="diag">🩺 Диагностика</button></div><div class="tab active" id=tab-clients>
+{% set regs=get_regs() %}<div class=card><h2>📝 Заявки ({{ regs|selectattr("status","equalto","pending")|list|length }})</h2>
+<form method=post action="/registrations/clear"><button class="btn sm o">🧹 Очистить обработанные</button></form>
+{% for r in regs %}<div style="border-bottom:1px solid rgba(148,163,184,.16);padding:9px 0"><b>{{ r.name }}</b> · {{ r.phone }}{% if r.email %} · {{ r.email }}{% endif %}
+<div class=hint>{{ r.created_at }} · {{ r.code }} · {% if r.status=="pending" %}<span class="badge off">проверка</span>{% elif r.status=="approved" %}<span class="badge on">одобрена</span>{% else %}<span class="badge off">отклонена</span>{% endif %}{% if r.comment %} · {{ r.comment[:70] }}{% endif %}</div>
+<div class=actions style="margin-top:6px"><form method=post action="/registrations/{{ r.id }}/delete"><button class="btn sm r">🗑</button></form>
+{% if r.status=="pending" %}<form method=post action="/registrations/{{ r.id }}/approve"><select name=plan_id style="max-width:140px"><option value=0>без тарифа</option>{% for p in get_plans() %}<option value="{{ p.id }}">{{ p.name }}</option>{% endfor %}</select><input name=balance type=number step=0.01 value=0><label style="display:flex;gap:4px;align-items:center;font-size:12px;margin:0"><input type=checkbox name=browser value=1 checked style="width:auto">браузер</label><button class="btn sm g">✔</button></form>
+<form method=post action="/registrations/{{ r.id }}/reject"><button class="btn sm r">✕</button></form>{% endif %}</div></div>{% else %}<p class=hint>Нет</p>{% endfor %}</div>
+<div class=card><h2>Добавить клиента</h2><form method=post action="/clients/add"><div class=grid>
+<div><label>TG ID (необязательно)</label><input name=tg_id></div><div><label>Имя *</label><input name=name required></div>
+<div><label>Email *</label><input name=email required></div><div><label>Баланс ₽</label><input name=balance type=number step=0.01 value=0></div>
+<div><label>Лимит GB</label><input name=limit_gb type=number step=0.1 value=0></div>
+<div><label>Inbound</label><select name=inbound_id id=addInbound><option value=0>по умолчанию</option></select></div>
+<div><label>Браузер-прокси</label><select name=browser><option value=1 selected>создать</option><option value="">нет</option></select></div>
+</div><p style="margin-top:12px"><button class=btn>➕ Добавить</button></p></form></div>
+<div class=card><h2>📥 Импорт из 3x-ui</h2><form method=post action="/clients/import" class=actions><select name=inbound_id id=impInbound style="max-width:280px"><option value=0>текущий</option></select><button class=btn>Импорт</button></form></div>
+<div class=card><h2>Клиенты ({{ clients|length }})</h2><div class=tablewrap><table><tr><th>Клиент</th><th>Баланс</th><th>Трафик</th><th>До</th><th>Ключ/код</th><th>Статус</th><th>Действия</th></tr>
+{% for c in clients %}<tr><td><b>{{ c.name }}</b><br><code>{{ c.email }}</code><br><span class=hint>{{ c.tg_id }}</span></td>
+<td>{{ "%.2f"|format(c.balance) }}</td><td>{{ c.used_gb }}/{% if c.limit_gb %}{{ "%g"|format(c.limit_gb) }}{% else %}∞{% endif %}{% if c.limit_gb %}<div class=bar><i style="width:{{ c.percent }}%"></i></div>{% endif %}</td>
+<td>{{ c.paid_str }}</td><td><code>{{ c.ext_key }}</code><br><code>{{ c.access_code }}</code>{% if c.http_port %}<br><span class=hint>{{ c.http_port }}</span>{% endif %}</td>
+<td>{% if c.enabled %}<span class="badge on">вкл</span>{% else %}<span class="badge off">выкл</span>{% endif %}</td>
+<td><div class=actions>
+<form method=post action="/clients/{{ c.id }}/topup"><input name=amount type=number step=0.01 placeholder="₽"><button class="btn sm g">＋</button></form>
+<form method=post action="/clients/{{ c.id }}/reset"><button class="btn sm o">Сброс</button></form>
+<form method=post action="/clients/{{ c.id }}/toggle"><button class="btn sm {% if c.enabled %}r{% else %}g{% endif %}">{% if c.enabled %}Выкл{% else %}Вкл{% endif %}</button></form>
+{% if not c.http_port %}<form method=post action="/clients/{{ c.id }}/browser"><button class="btn sm o">＋HTTP</button></form>{% endif %}
+<form method=post action="/clients/{{ c.id }}/sync"><button class="btn sm o">Синк</button></form>
+<a class="btn sm g" href="/enter/{{ c.tg_id }}/{{ c.access_code }}" target=_blank>🔗</a>
+{% for p in get_plans() %}<form method=post action="/clients/{{ c.id }}/setplan/{{ p.id }}"><button class="btn sm o">{{ p.name }}</button></form>{% endfor %}
+<form method=post action="/clients/{{ c.id }}/code"><input name=code placeholder="код"><button class="btn sm o">Код</button></form>
+<form method=post action="/clients/{{ c.id }}/codeoff"><button class="btn sm o">🔓</button></form>
+<form method=post action="/clients/{{ c.id }}/delete" onsubmit="return confirm('Удалить?')"><button class="btn sm r">✕</button></form>
+</div></td></tr>{% else %}<tr><td colspan=7>Нет</td></tr>{% endfor %}</table></div></div></div><div class=tab id=tab-plans><div class=card><h2>Новый тариф</h2><form method=post action="/plans/add"><div class=grid>
+<div><label>Название</label><input name=name required></div><div><label>Цена</label><input name=price type=number step=0.01 value=200></div>
+<div><label>Дней</label><input name=period_days type=number value=30></div><div><label>Лимит GB</label><input name=limit_gb type=number step=0.1 value=0></div>
+<div><label>Описание</label><input name=description></div></div><p style="margin-top:12px"><button class=btn>➕</button></p></form></div>
+{% for p in get_plans(False) %}<div class=card><h2>{{ p.name }} <span class=hint>ID {{ p.id }}</span></h2>
+<form method=post action="/plans/{{ p.id }}/save"><div class=grid>
+<div><label>Название</label><input name=name value="{{ p.name }}"></div><div><label>Цена</label><input name=price type=number step=0.01 value="{{ p.price }}"></div>
+<div><label>Дней</label><input name=period_days type=number value="{{ p.period_days }}"></div><div><label>Лимит</label><input name=limit_gb type=number step=0.1 value="{{ p.limit_gb }}"></div>
+<div><label>Описание</label><input name=description value="{{ p.description }}"></div></div><p style="margin-top:12px"><button class="btn sm g">💾</button></p></form>
+<div class=actions style="margin-top:8px"><form method=post action="/plans/{{ p.id }}/toggle"><button class="btn sm o">{% if p.enabled %}Выкл{% else %}Вкл{% endif %}</button></form>
+<form method=post action="/plans/{{ p.id }}/delete"><button class="btn sm r">✕</button></form></div></div>{% endfor %}
+<div class=card><h2>🎁 Промокоды</h2><p class=hint>balance — деньги; plan — тариф (значение=ID); days — дни.</p>
+<form method=post action="/promos/add" style="margin-top:12px"><div class=grid>
+<div><label>Код</label><input name=code required style="text-transform:uppercase"></div>
+<div><label>Тип</label><select name=kind><option value=balance>balance</option><option value=plan>plan</option><option value=days>days</option></select></div>
+<div><label>Значение</label><input name=value type=number step=0.01 value=100></div>
+<div><label>Лимит</label><input name=max_uses type=number value=0></div><div><label>Срок дней</label><input name=valid_days type=number value=0></div></div>
+<p style="margin-top:12px"><button class=btn>➕</button></p></form>
+<div class=tablewrap style="margin-top:14px"><table><tr><th>Код</th><th>Тип</th><th>Знач</th><th>Исп</th><th></th></tr>
+{% for p in get_promos() %}<tr><td><code>{{ p.code }}</code></td><td>{{ p.kind }}</td><td>{{ "%g"|format(p.value) }}</td><td>{{ p.used_count }}/{{ p.max_uses or "∞" }}</td>
+<td><div class=actions><form method=post action="/promos/{{ p.id }}/toggle"><button class="btn sm o">⇄</button></form><form method=post action="/promos/{{ p.id }}/delete"><button class="btn sm r">✕</button></form></div></td></tr>{% endfor %}</table></div></div></div><div class=tab id=tab-settings>
+<div class=card><h2>🪄 Автонастройка 3x-ui</h2><form method=post action="/xui/autoconfig" class=actions><select name=inbound_id id=acInbound style="max-width:330px"><option value="">автовыбор</option></select><button class=btn>🔍 Подтянуть</button><button type=button class="btn o" onclick=loadIb()>Обновить</button></form></div>
+<form method=post action="/settings">
+<div class=card><h2>3x-ui</h2><div class=grid>
+<div><label>URL (с base path)</label><input name=xui_url value="{{ s.xui_url }}"></div>
+<div><label>Логин</label><input name=xui_user value="{{ s.xui_user }}"></div>
+<div><label>Пароль</label><input name=xui_pass type=password value="{{ s.xui_pass }}"></div>
+<div><label>API-токен</label><input name=xui_api_token value="{{ s.xui_api_token }}"></div>
+<div><label>Inbound ID</label><input name=inbound_id value="{{ s.inbound_id }}"></div></div></div>
+<div class=card><h2>Ссылки</h2><div class=grid>
+<div><label>Публичный URL</label><input name=public_url value="{{ s.public_url }}"></div>
+<div><label>Админка URL</label><input name=admin_url value="{{ s.admin_url }}"></div>
+<div><label>База подписки</label><input name=sub_url_base value="{{ s.sub_url_base }}"></div>
+<div><label>SNI</label><input name=sni value="{{ s.sni }}"></div><div><label>Порт VLESS</label><input name=vless_port value="{{ s.vless_port }}"></div>
+<div><label>pbk</label><input name=reality_pbk value="{{ s.reality_pbk }}"></div><div><label>sid</label><input name=reality_sid value="{{ s.reality_sid }}"></div>
+<div><label>fp</label><input name=fp value="{{ s.fp }}"></div></div></div>
+<div class=card><h2>Telegram</h2><div class=grid>
+<div><label>Bot Token</label><input name=bot_token value="{{ s.bot_token }}"></div>
+<div><label>TG ID админа</label><input name=admin_tg_id value="{{ s.admin_tg_id }}"></div>
+<div><label>Название панели</label><input name=panel_name value="{{ s.panel_name }}"></div></div></div>
+<div class=card><h2>Биллинг и прокси</h2><div class=grid>
+<div><label>Биллинг</label><select name=billing_enabled><option value=0 {% if s.billing_enabled=="0" %}selected{% endif %}>выкл</option><option value=1 {% if s.billing_enabled=="1" %}selected{% endif %}>вкл</option></select></div>
+<div><label>Цена</label><input name=price value="{{ s.price }}"></div><div><label>Период</label><input name=period_days value="{{ s.period_days }}"></div>
+<div><label>Секрет webhook</label><input name=billing_secret value="{{ s.billing_secret }}"></div>
+<div><label>Порты от</label><input name=http_port_start value="{{ s.http_port_start }}"></div>
+<div><label>Порты до</label><input name=http_port_end value="{{ s.http_port_end }}"></div>
+<div><label>Показ ссылок</label><select name=require_plan><option value=1 {% if s.require_plan!="0" %}selected{% endif %}>после тарифа</option><option value=0 {% if s.require_plan=="0" %}selected{% endif %}>сразу</option></select></div>
+</div></div><button class=btn>💾 Сохранить</button></form></div><div class=tab id=tab-ext><div class=card><h2>Расширение</h2><p><a class=btn href="/extension.zip">⬇ Скачать</a></p>
+<p class=hint>Шифрование: {% if tls_on() %}<span class="badge on">TLS</span>{% else %}<span class="badge off">HTTP — нужен валидный сертификат</span>{% endif %}</p></div>
+<div class=card><h2>Пресеты</h2><form method=post action="/presets/add"><label>Название</label><input name=name required><label>Домены</label><textarea name=domains required></textarea><p style="margin-top:10px"><button class=btn>➕</button></p></form>
+{% set pr=load_json(s.ext_presets or "{}") %}<div class=tablewrap style="margin-top:14px"><table><tr><th>Пресет</th><th>Домены</th><th></th></tr>
+{% for n,ds in pr.items() %}<tr><td><b>{{ n }}</b></td><td class=hint>{{ ds|length }}</td><td><form method=post action="/presets/delete"><input type=hidden name=name value="{{ n }}"><button class="btn sm r">✕</button></form></td></tr>{% endfor %}</table></div></div>
+<form method=post action="/settings"><div class=card><h2>Списки (JSON)</h2><textarea name=ext_lists>{{ s.ext_lists }}</textarea></div>
+<div class=card><h2>Пресеты JSON</h2><textarea name=ext_presets>{{ s.ext_presets }}</textarea></div><button class=btn>💾</button></form>
+<div class=card><h2>Предложения ({{ suggestions|length }})</h2>{% for g in suggestions %}<p><b>{{ g.name }}</b> <code>{{ g.domains[:90] }}</code>
+<span class=actions><form method=post action="/suggestions/{{ g.id }}/approve"><button class="btn sm g">✔</button></form><form method=post action="/suggestions/{{ g.id }}/delete"><button class="btn sm r">✕</button></form></span></p>{% else %}<p class=hint>Нет</p>{% endfor %}</div></div><div class=tab id=tab-tools>
+<div class=card><h2>⬆️ Обновление файлом</h2><p class=hint>.zip или .py/.html. Проверка → бэкап → применение → авто-откат.</p>
+<form method=post action="/update/upload" enctype=multipart/form-data class=actions style="margin-top:10px"><input type=file name=file style="width:auto"><button class=btn>⬆️</button><button type=button class="btn o" onclick=upd()>Статус</button></form>
+<textarea id=updOut class=big readonly style="margin-top:12px"></textarea></div>
+<div class=card><h2>🧪 API 3x-ui</h2><button class="btn o" onclick=prb()>Проверить</button><textarea id=prbOut class=big readonly style="margin-top:12px"></textarea></div></div>
+<div class=tab id=tab-diag><div class=card><h2>🩺 Диагностика</h2><div class=actions><button class=btn onclick=dg()>🔄 Собрать</button><button class="btn g" onclick=cpt(this)>📋 Копировать</button></div>
+<textarea id=diagReport class=big readonly style="margin-top:14px"></textarea></div></div></main><script>
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('tab-'+b.dataset.tab).classList.add('active');localStorage.setItem('pm_tab',b.dataset.tab);if(b.dataset.tab==='diag')dg();});
+const sv=localStorage.getItem('pm_tab');if(sv){const b=document.querySelector('.tabs button[data-tab="'+sv+'"]');if(b)b.click();}
+async function poll(){const d=document.getElementById('xuiDot'),t=document.getElementById('xuiStatus');try{const j=await (await fetch('/api/xui_status')).json();d.className='dot '+(j.ok?'ok':'bad');t.innerHTML='';t.appendChild(d);t.append(j.ok?('3x-ui '+j.xray):'3x-ui недоступен');}catch(e){d.className='dot bad';}}
+poll();setInterval(poll,20000);
+async function loadIb(){let d=[];try{const j=await (await fetch('/xui/inbounds')).json();if(j.ok)d=j.inbounds;}catch(e){}
+const lb=i=>'№'+i.id+' порт '+i.port+' · '+(i.clients||0)+' кл';
+const ac=document.getElementById('acInbound');if(ac){ac.innerHTML='<option value="">автовыбор</option>';d.forEach(i=>{const o=document.createElement('option');o.value=i.id;o.textContent=lb(i);ac.appendChild(o)});}
+['addInbound','impInbound'].forEach(id=>{const s=document.getElementById(id);if(!s)return;const df=s.querySelector('option[value="0"]');s.innerHTML='';if(df)s.appendChild(df);d.forEach(i=>{const o=document.createElement('option');o.value=i.id;o.textContent=lb(i);s.appendChild(o)});});}
+loadIb();
+async function dg(){const t=document.getElementById('diagReport');t.value='…';try{const j=await (await fetch('/api/diagnostics')).json();t.value=j.report||'ошибка';}catch(e){t.value=''+e;}}
+function cpt(b){const t=document.getElementById('diagReport');if(!t.value)return;t.select();navigator.clipboard.writeText(t.value).then(()=>{const x=b.textContent;b.textContent='✅';setTimeout(()=>b.textContent=x,1500)});}
+async function upd(){document.getElementById('updOut').value=(await (await fetch('/update/status')).json()).text||'';}
+async function prb(){document.getElementById('prbOut').value=JSON.stringify(await (await fetch('/api/probe')).json(),null,1);}
+</script></body></html>
